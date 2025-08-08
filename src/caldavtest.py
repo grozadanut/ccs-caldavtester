@@ -18,7 +18,7 @@
 Class to encapsulate a single caldav test run.
 """
 
-from cStringIO import StringIO
+from io import StringIO
 try:
     # Treat pycalendar as optional
     from pycalendar.icalendar.calendar import Calendar
