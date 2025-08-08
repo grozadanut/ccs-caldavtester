@@ -33,7 +33,7 @@ from src.request import stats
 from src.testsuite import testsuite
 from src.xmlUtils import nodeForPath, xmlPathSplit
 from xml.etree.cElementTree import ElementTree, tostring
-import commands
+import subprocess
 import http.client as httplib
 import json
 import os
@@ -1118,7 +1118,9 @@ class caldavtest(object):
         """
         if self.manager.postgresLog:
             if os.path.exists(self.manager.postgresLog):
-                return int(commands.getoutput("grep \"LOG:  statement:\" %s | wc -l" % (self.manager.postgresLog,)))
+                cmd = 'grep "LOG:  statement:" {} | wc -l'.format(self.manager.postgresLog)
+                result = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, text=True)
+                return int(result.stdout.strip())
 
         return 0
 
@@ -1126,7 +1128,9 @@ class caldavtest(object):
 
         if self.manager.postgresLog:
             if os.path.exists(self.manager.postgresLog):
-                newCount = int(commands.getoutput("grep \"LOG:  statement:\" %s | wc -l" % (self.manager.postgresLog,)))
+                cmd = 'grep "LOG:  statement:" {} | wc -l'.format(self.manager.postgresLog)
+                result = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, text=True)
+                newCount = int(result.stdout.strip())
             else:
                 newCount = 0
             self.manager.message("trace", "Postgres Statements: %d" % (newCount - startCount,))
