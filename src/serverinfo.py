@@ -253,6 +253,10 @@ class serverinfo(object):
                     value = schild.text.encode("utf-8") if schild.text else ""
 
             if key and value:
+                if isinstance(key, bytes):
+                    key = key.decode('utf-8')
+                if isinstance(value, bytes):
+                    value = value.decode('utf-8')
                 if repeat:
                     for count in range(1, int(repeat) + 1):
                         self.subsdict[key % (count,)] = (value % (count,)) if "%" in value else value
