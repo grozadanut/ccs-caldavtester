@@ -120,7 +120,7 @@ class serverinfo(object):
             db_actual = self.subsdict
         else:
             db_actual = db
-        for key, value in items.iteritems():
+        for key, value in items.items():
             db_actual[key] = value
 
         if db is None:

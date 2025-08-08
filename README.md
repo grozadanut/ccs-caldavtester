@@ -28,8 +28,8 @@ into the virtualenv:
 
 	git clone https://github.com/apple/ccs-caldavtester.git
 	cd ccs-caldevtester
-	virtualenv venv
-	source venv/bin/activate
+	python3 -m venv venv
+    source venv/bin/activate
 	pip install -r requirements.txt
 
 # COMMAND LINE OPTIONS

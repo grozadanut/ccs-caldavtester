@@ -122,10 +122,10 @@ class caldavtest(object):
             self.doenddelete("Deleting Requests...", label="%s | %s" % (self.name, "END_DELETE"))
             self.dorequests("End Requests...", self.end_requests, False, label="%s | %s" % (self.name, "END_REQUESTS"))
             return ok, failed, ignored
-        except socket.error, msg:
+        except socket.error as msg:
             self.manager.testFile(self.name, "SOCKET ERROR: %s" % (msg,), manager.RESULT_ERROR)
             return 0, 1, 0
-        except Exception, e:
+        except Exception as e:
             self.manager.testFile(self.name, "FATAL ERROR: %s" % (e,), manager.RESULT_ERROR)
             if self.manager.debug:
                 traceback.print_exc()
@@ -590,7 +590,7 @@ class caldavtest(object):
 
         if isinstance(req, pause):
             # Useful for pausing at a particular point
-            print "Paused"
+            print("Paused")
             sys.stdin.readline()
             return True, "", None, None
 

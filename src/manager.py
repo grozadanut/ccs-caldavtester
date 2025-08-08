@@ -77,7 +77,7 @@ class manager(object):
     def logit(self, str):
         if self.logFile:
             self.logFile.write(str + "\n")
-        print str
+        print(str)
 
     def loadObserver(self, observer_name):
         module = __import__("observers." + observer_name, globals(), locals(), ["Observer", ])
@@ -137,7 +137,7 @@ class manager(object):
         # Open and parse the server config file
         try:
             tree = ElementTree(file=serverfile)
-        except ExpatError, e:
+        except ExpatError as e:
             raise RuntimeError("Unable to parse file '%s' because: %s" % (serverfile, e,))
 
         # Verify that top-level element is correct
@@ -181,7 +181,7 @@ class manager(object):
             # Open and parse the config file
             try:
                 tree = ElementTree(file=fname)
-            except ExpatError, e:
+            except ExpatError as e:
                 raise RuntimeError("Unable to parse file '%s' because: %s" % (fname, e,))
             caldavtest_node = tree.getroot()
             if caldavtest_node.tag != src.xmlDefs.ELEMENT_CALDAVTEST:
@@ -286,7 +286,7 @@ class manager(object):
             elif option == "-m":
                 self.memUsage = True
             elif option == "-o":
-                self.logFile = open(value, "w")
+                self.logFile = open(value, "w", encoding="utf-8")
             elif option == "--pid":
                 pidfile = value
             elif option == "--observer":
@@ -355,7 +355,7 @@ class manager(object):
         self.readXML(sname, fnames, ssl, all)
 
         if self.memUsage:
-            fd = open(pidfile, "r")
+            fd = open(pidfile, "r", encoding="utf-8")
             s = fd.read()
             self.pid = int(s)
 

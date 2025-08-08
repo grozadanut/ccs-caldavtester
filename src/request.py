@@ -313,7 +313,7 @@ class request(object):
                 data = self.data.value
             elif self.data.filepath:
                 # read in the file data
-                fd = open(self.data.nextpath if hasattr(self.data, "nextpath") else self.getFilePath(), "r")
+                fd = open(self.data.nextpath if hasattr(self.data, "nextpath") else self.getFilePath(), "r", encoding="utf-8")
                 try:
                     data = fd.read()
                 finally:
@@ -537,7 +537,7 @@ class generator(object):
 
         # Re-do substitutions from values generated during the current test run
         if self.manager.server_info.hasextrasubs():
-            for name, values in self.args.iteritems():
+            for name, values in self.args.items():
                 newvalues = [self.manager.server_info.extrasubs(value) for value in values]
                 self.args[name] = newvalues
 
@@ -604,7 +604,7 @@ class verify(object):
 
         # Re-do substitutions from values generated during the current test run
         if self.manager.server_info.hasextrasubs():
-            for name, values in self.args.iteritems():
+            for name, values in self.args.items():
                 newvalues = [self.manager.server_info.extrasubs(value) for value in values]
                 self.args[name] = newvalues
 
