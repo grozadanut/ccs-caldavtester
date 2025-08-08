@@ -99,11 +99,17 @@ class caldavtest(object):
         return self.exclude_features & self.manager.server_info.features
 
     def run(self):
-        if len(self.missingFeatures()) != 0:
-            self.manager.testFile(self.name, "Missing features: %s" % (", ".join(sorted(self.missingFeatures()),)), manager.RESULT_IGNORED)
+        missing = self.missingFeatures()
+        if len(missing) != 0:
+            # decode bytes if needed
+            missing_str = [x.decode('utf-8') if isinstance(x, bytes) else x for x in missing]
+            self.manager.testFile(self.name, "Missing features: %s" % (", ".join(sorted(missing_str)),), manager.RESULT_IGNORED)
             return 0, 0, 1
-        if len(self.excludedFeatures()) != 0:
-            self.manager.testFile(self.name, "Excluded features: %s" % (", ".join(sorted(self.excludedFeatures()),)), manager.RESULT_IGNORED)
+
+        excluded = self.excludedFeatures()
+        if len(excluded) != 0:
+            excluded_str = [x.decode('utf-8') if isinstance(x, bytes) else x for x in excluded]
+            self.manager.testFile(self.name, "Excluded features: %s" % (", ".join(sorted(excluded_str)),), manager.RESULT_IGNORED)
             return 0, 0, 1
 
         # Always need a new set of UIDs for the entire test
