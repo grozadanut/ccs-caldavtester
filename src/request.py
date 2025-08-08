@@ -28,7 +28,7 @@ import re
 import src.xmlDefs
 import time
 import urllib
-import urlparse
+import urllib.parse as urlparse
 import uuid
 
 algorithms = {

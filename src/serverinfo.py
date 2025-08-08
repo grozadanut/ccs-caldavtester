@@ -21,8 +21,9 @@ Class that encapsulates the server information for a CalDAV test run.
 import datetime
 import re
 import src.xmlDefs
+import urllib.parse as urlparse
 from uuid import uuid4
-from urlparse import urlparse
+
 
 
 class serverinfo(object):

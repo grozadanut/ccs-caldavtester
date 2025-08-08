@@ -14,7 +14,7 @@
 # limitations under the License.
 ##
 
-import httplib
+import http.client as httplib
 import socket
 import ssl as sslmodule
 

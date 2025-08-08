@@ -34,7 +34,7 @@ from src.testsuite import testsuite
 from src.xmlUtils import nodeForPath, xmlPathSplit
 from xml.etree.cElementTree import ElementTree, tostring
 import commands
-import httplib
+import http.client as httplib
 import json
 import os
 import rfc822
@@ -44,7 +44,7 @@ import sys
 import time
 import traceback
 import urllib
-import urlparse
+import urllib.parse as urlparse
 
 """
 Patch the HTTPConnection.send to record full request details
