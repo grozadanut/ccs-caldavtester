@@ -17,6 +17,7 @@
 ##
 
 from __future__ import print_function
+from pathlib import Path
 
 from os.path import dirname, abspath, join as joinpath
 from setuptools import setup, find_packages as setuptools_find_packages
@@ -166,7 +167,7 @@ project_name = "CalDAVTester"
 
 description = "CalDAV/CardDAV protocol test suite"
 
-long_description = file(joinpath(dirname(__file__), "README.md")).read()
+long_description = Path(__file__).with_name("README.md").read_text(encoding="utf-8")
 
 url = "https://github.com/apple/ccs-caldavtester"
 
