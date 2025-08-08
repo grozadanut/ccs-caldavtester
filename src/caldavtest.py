@@ -901,7 +901,7 @@ class caldavtest(object):
     def parseXML(self, node):
         self.ignore_all = node.get(src.xmlDefs.ATTR_IGNORE_ALL, src.xmlDefs.ATTR_VALUE_NO) == src.xmlDefs.ATTR_VALUE_YES
 
-        for child in node.getchildren():
+        for child in node:
             if child.tag == src.xmlDefs.ELEMENT_DESCRIPTION:
                 self.description = child.text
             elif child.tag == src.xmlDefs.ELEMENT_REQUIRE_FEATURE:
@@ -918,7 +918,7 @@ class caldavtest(object):
                 self.end_requests = request.parseList(self.manager, child)
 
     def parseFeatures(self, node, require=True):
-        for child in node.getchildren():
+        for child in node:
             if child.tag == src.xmlDefs.ELEMENT_FEATURE:
                 (self.require_features if require else self.exclude_features).add(child.text.encode("utf-8"))
 
@@ -951,12 +951,12 @@ class caldavtest(object):
                 if len(prop) != 1:
                     return False, "           Wrong number of DAV:prop elements\n"
 
-                for child in prop[0].getchildren():
+                for child in prop[0]:
                     fqname = child.tag
                     if len(child):
                         # Copy sub-element data as text into one long string and strip leading/trailing space
                         value = ""
-                        for p in child.getchildren():
+                        for p in child:
                             temp = tostring(p)
                             temp = temp.strip()
                             value += temp
