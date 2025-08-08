@@ -33,11 +33,11 @@ from src.request import stats
 from src.testsuite import testsuite
 from src.xmlUtils import nodeForPath, xmlPathSplit
 from xml.etree.cElementTree import ElementTree, tostring
+from email.utils import parsedate
 import subprocess
 import http.client as httplib
 import json
 import os
-import rfc822
 import socket
 import src.xmlDefs
 import sys
@@ -407,7 +407,7 @@ class caldavtest(object):
                                 if len(glm) != 1:
                                     continue
                                 value = glm[0].text
-                                value = rfc822.parsedate(value)
+                                value = parsedate(value)
                                 value = time.mktime(value)
                                 if value > latest:
                                     possible_matches.clear()
