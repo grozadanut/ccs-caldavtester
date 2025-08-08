@@ -27,6 +27,7 @@ import random
 import src.xmlDefs
 import sys
 import time
+import os
 
 # Exceptions
 
@@ -310,10 +311,14 @@ class manager(object):
 
         if all or not args:
             files = []
-            os.path.walk(dname, lambda arg, dir, names: files.extend([os.path.join(dir, name) for name in names]) if not dir.startswith("test") else None, None)
+            for dirpath, dirnames, filenames in os.walk(dname):
+                if not dirpath.startswith("test"):
+                    files.extend([os.path.join(dirpath, name) for name in filenames])
+
             for file in files:
-                if file.endswith(".xml") and file[len(dname) + 1:] not in excludes:
-                    if subdir is None or file[len(dname) + 1:].startswith(subdir):
+                relative_path = file[len(dname) + 1:]
+                if file.endswith(".xml") and relative_path not in excludes:
+                    if subdir is None or relative_path.startswith(subdir):
                         fnames.append(file)
 
         # Remove any server info file from files enumerated by --all
