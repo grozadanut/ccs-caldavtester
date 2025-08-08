@@ -81,6 +81,8 @@ class serverinfo(object):
     def subs(self, sub, db=None):
 
         # Special handling for relative date-times
+        if isinstance(sub, bytes):
+            sub = sub.decode('utf-8')
         pos = sub.find("$now.")
         while pos != -1:
             endpos = pos + sub[pos:].find(":")
